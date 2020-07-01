@@ -4,8 +4,8 @@ const MOSTER_ATTACK_VALUE = 14;
 const HEAL_VALUE = 20;
 
 let chossenMaxLife = 100;
-let currentMosterHealth = chossenMaxValue;
-let currentPlayerHealth = chossenMaxValue;
+let currentMosterHealth = chossenMaxLife;
+let currentPlayerHealth = chossenMaxLife;
 
 
 adjustHealthBars(chossenMaxLife);
