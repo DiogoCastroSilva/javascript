@@ -19,10 +19,16 @@ function attackMoster(mode = 'ATTACK') {
     if (mode === 'STRONG_ATTACK') {
         maxDamage = STRONG_ATTACK_VALUE;
     }
-    const damage = dealMonsterDamage(ATTACK_VALUE);
+    const damage = dealMonsterDamage(maxDamage);
     currentMosterHealth -= damage;
     endRound();
 }
+
+function attackPlayer() {
+    const playerDamage = dealPlayerDamage(MOSTER_ATTACK_VALUE);
+    currentPlayerHealth -= playerDamage;
+}
+
 
 function attackHandler() {
     attackMoster('STRONG_ATTACK');
@@ -30,11 +36,6 @@ function attackHandler() {
 
 function strongAttackHandler() {
     attackMoster();
-}
-
-function mosterAttack() {
-    const playerDamage = dealPlayerDamage(MOSTER_ATTACK_VALUE);
-    currentPlayerHealth -= playerDamage;
 }
 
 function healPlayerHandler() {
@@ -51,6 +52,12 @@ function healPlayerHandler() {
 
 
 
+function reset() {
+    currentPlayerHealth = chossenMaxLife;
+    currentMosterHealth = chossenMaxLife;
+    resetGame(chossenMaxLife);
+}
+
 function isGameOver() {
     if (currentPlayerHealth <= 0 || currentMosterHealth <= 0) {
         return true;
@@ -61,14 +68,17 @@ function isGameOver() {
 
 function endRound() {
     const initialPlayerHealth = currentPlayerHealth;
-    mosterAttack();
+    attackPlayer();
     bonusLife(initialPlayerHealth);
     if (currentMosterHealth <= 0 && currentPlayerHealth > 0) {
         alert('You won');
+        reset();
     } else if (currentPlayerHealth <= 0 && currentMosterHealth > 0) {
         alert('You lost');
+        reset();
     } else if (currentPlayerHealth <= 0 && currentMosterHealth <= 0) {
         alert('You have a draw');
+        reset();
     }
 }
 
