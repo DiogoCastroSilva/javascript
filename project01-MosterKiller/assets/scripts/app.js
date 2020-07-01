@@ -6,6 +6,7 @@ const HEAL_VALUE = 20;
 let chossenMaxLife = 100;
 let currentMosterHealth = chossenMaxLife;
 let currentPlayerHealth = chossenMaxLife;
+let hasBonusLife = true;
 
 
 adjustHealthBars(chossenMaxLife);
@@ -20,7 +21,6 @@ function attackMoster(mode = 'ATTACK') {
     }
     const damage = dealMonsterDamage(ATTACK_VALUE);
     currentMosterHealth -= damage;
-    mosterAttack();
     endRound();
 }
 
@@ -45,7 +45,6 @@ function healPlayerHandler() {
     }
     increasePlayerHealth(healValue);
     currentPlayerHealth += healValue;
-    mosterAttack();
     endRound();
 }
 
@@ -61,6 +60,9 @@ function isGameOver() {
 }
 
 function endRound() {
+    const initialPlayerHealth = currentPlayerHealth;
+    mosterAttack();
+    bonusLife(initialPlayerHealth);
     if (currentMosterHealth <= 0 && currentPlayerHealth > 0) {
         alert('You won');
     } else if (currentPlayerHealth <= 0 && currentMosterHealth > 0) {
@@ -70,6 +72,15 @@ function endRound() {
     }
 }
 
+function bonusLife(initialPlayerHealth) {
+    if (currentPlayerHealth <= 0 && hasBonusLife) {
+        hasBonusLife = false;
+        removeBonusLife();
+        currentPlayerHealth = initialPlayerHealth;
+        alert('You would be death but the bonus life saved you!');
+        setPlayerHealth(initialPlayerHealth);
+    }
+}
 
 attackBtn.addEventListener('click', attackHandler);
 strongAttackBtn.addEventListener('click', strongAttackHandler);
