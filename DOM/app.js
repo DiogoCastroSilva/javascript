@@ -6,3 +6,11 @@ const items = document.getElementsByClassName('list-item');
 const item = document.querySelector('.list-item');
 // Get all items with class -> Node list
 const items2 = document.querySelectorAll('.list-item');
+
+
+// Changing the DOM
+setTimeout(() => {
+    h1.textContent = 'New value';
+    h1.style.color = 'red';
+    h1.style.backgroundColor = 'black';
+}, 2000);
