@@ -50,3 +50,10 @@ const section = document.querySelector('section');
 section.innerHTML = '<p>New p element</p>';
 // Adding without changing
 section.insertAdjacentHTML('beforeend', '<p>New p Element</p>');
+
+// Better way to add new elements
+const li = document.createElement('li');
+li.textContent = 'New item';
+li.style.color = 'red';
+li.style.backgroundColor = 'black';
+list.appendChild(li);
