@@ -56,4 +56,13 @@ const li = document.createElement('li');
 li.textContent = 'New item';
 li.style.color = 'red';
 li.style.backgroundColor = 'black';
+// Adds new item to the end
 list.appendChild(li);
+// Adds new item to the begining
+list.prepend(li);
+// Adds to elemnt before the last
+list.lastElementChild.before(li);
+
+// Instead of moving the element we can clone
+const newLi = li.cloneNode(true);
+list.appendChild(li, newLi);
