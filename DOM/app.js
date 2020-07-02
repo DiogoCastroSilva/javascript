@@ -14,3 +14,10 @@ setTimeout(() => {
     h1.style.color = 'red';
     h1.style.backgroundColor = 'black';
 }, 2000);
+
+// Attributes vs Properties
+const input = document.querySelector('input');
+// Changes value propety in DOM
+input.setAttribute('value', 'New value');
+// Changes only the Value of input, the DOM value attribute doesn't update
+input.value = 'New value 1';
