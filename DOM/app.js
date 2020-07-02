@@ -33,3 +33,8 @@ const nodeChildren = list.childNodes;
 
 // ParentNode
 item.parentNode // -> <ul><li>Item 1</li><li>Item 2</li></ul>
+
+// Sibilings
+list.previousSibling // Selects the tab/space
+list.previousElementSibling // Selects the previous sibling -> <header></header>
+list.nextElementSibling // Selects the next sibling - > <input></input>
