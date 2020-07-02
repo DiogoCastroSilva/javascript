@@ -38,3 +38,15 @@ item.parentNode // -> <ul><li>Item 1</li><li>Item 2</li></ul>
 list.previousSibling // Selects the tab/space
 list.previousElementSibling // Selects the previous sibling -> <header></header>
 list.nextElementSibling // Selects the next sibling - > <input></input>
+
+// Transversal instead of Query
+// Harder to read and if changes occour in the DOM hard to fix
+const ul = document.body.firstElementChild.nextElementSibling;
+const firstLi = ul.firstElementChild;
+
+// Adding new elements
+// Deletes old content and adds new, also re-renders all the content inside
+const section = document.querySelector('section');
+section.innerHTML = '<p>New p element</p>';
+// Adding without changing
+section.insertAdjacentHTML('beforeend', '<p>New p Element</p>');
