@@ -1,3 +1,8 @@
+const ADD = 'ADD';
+const SUBTRACT = 'SUBTRACT';
+const DIVIDE = 'DIVIDE';
+const MULTIPLY = 'MULTIPLY';
+
 const defaultResult = 0;
 let currentResult = defaultResult;
 let logEntries = [];
@@ -28,39 +33,46 @@ function writeToLog(operation, prev, number, result) {
   console.log(logEntries);
 }
 
-function add() {
-  const enteredNumber = getUserNumberInput();
+function add(enteredNumber) {
   const initialResult = currentResult;
   currentResult += enteredNumber;
-  outputResult("+", initialResult, enteredNumber);
-  writeToLog("ADD", initialResult, enteredNumber, currentResult);
+  createAndWriteOutput("+", initialResult, enteredNumber);
 }
 
-function subtract() {
-  const enteredNumber = getUserNumberInput();
+function subtract(enteredNumber) {
   const initialResult = currentResult;
   currentResult -= enteredNumber;
   createAndWriteOutput("-", initialResult, enteredNumber);
-  writeToLog("SUBTRACT", initialResult, enteredNumber, currentResult);
 }
 
-function multiply() {
-  const enteredNumber = getUserNumberInput();
+function multiply(enteredNumber) {
   const initialResult = currentResult;
   currentResult *= enteredNumber;
   createAndWriteOutput("*", initialResult, enteredNumber);
-  writeToLog("MULTIPLY", initialResult, enteredNumber, currentResult);
 }
 
-function divide() {
-  const enteredNumber = getUserNumberInput();
+function divide(enteredNumber) {
   const initialResult = currentResult;
   currentResult /= enteredNumber;
   createAndWriteOutput("/", initialResult, enteredNumber);
-  writeToLog("DIVIDE", initialResult, enteredNumber, currentResult);
 }
 
-addBtn.addEventListener("click", add);
-subtractBtn.addEventListener("click", subtract);
-multiplyBtn.addEventListener("click", multiply);
-divideBtn.addEventListener("click", divide);
+function calculate(operation) {
+  const enteredNumber = getUserNumberInput();
+  const initialResult = currentResult;
+  if (operation === ADD) {
+    add(enteredNumber);
+  } else if (operation === SUBTRACT) {
+    subtract(enteredNumber);
+  } else if (operation === MULTIPLY) {
+    multiply(enteredNumber);
+  } else if (operation === DIVIDE) {
+    divide(enteredNumber);
+  }
+  writeToLog(operation, initialResult, enteredNumber, currentResult);
+}
+
+addBtn.addEventListener("click", calculate.bind(this, ADD));
+subtractBtn.addEventListener("click", calculate.bind(this, SUBTRACT));
+multiplyBtn.addEventListener("click", calculate.bind(this, MULTIPLY));
+divideBtn.addEventListener("click", calculate.bind(this, DIVIDE));
