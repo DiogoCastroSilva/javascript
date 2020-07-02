@@ -34,6 +34,17 @@ const startGameHandler = () => {
     const playerSelection = getPlayerChoice();
     const computerSelection = getComputerChoice();
     const winner = getWinner(computerSelection, playerSelection);
+    let message = `You picked ${playerSelection} and the computer picked ${computerSelection}, therefore you `;
+    if (winner === RESULT_DRAW) {
+        message += 'had a Draw.';
+    } else if (winner === RESULT_PLAYER_WINS) {
+        message += 'win.';
+    } else {
+        message += 'lost.';
+    }
+
+    alert(message);
+    gameIsRunning = false;
 };
 
 const getPlayerChoice = () => {
