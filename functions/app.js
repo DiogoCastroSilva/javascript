@@ -88,3 +88,18 @@ const getWinner = (computerChoice, userChoice) => {
 };
 
 startGameBtn.addEventListener('click', startGameHandler);
+
+
+// Not related to game
+
+// Rest operator
+const sum = (...numbers) => {
+    let sum = 0;
+    for (const number of numbers) {
+        sum += number;
+    }
+    return sum;
+}
+
+console.log(`Sum: ${sum(1, 2, 3)}`);
+console.log(`Sum: ${sum(1, 2, 3, 4, 5)}`);
