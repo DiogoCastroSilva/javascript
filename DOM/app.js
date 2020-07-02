@@ -21,3 +21,11 @@ const input = document.querySelector('input');
 input.setAttribute('value', 'New value');
 // Changes only the Value of input, the DOM value attribute doesn't update
 input.value = 'New value 1';
+
+
+// Child nodes
+const list = document.querySelector('ul');
+// all items
+const children = list.children;
+// all items plus the sapces and tabs
+const nodeChildren = list.childNodes;
