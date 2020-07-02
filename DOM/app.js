@@ -29,3 +29,7 @@ const list = document.querySelector('ul');
 const children = list.children;
 // all items plus the sapces and tabs
 const nodeChildren = list.childNodes;
+
+
+// ParentNode
+item.parentNode // -> <ul><li>Item 1</li><li>Item 2</li></ul>
