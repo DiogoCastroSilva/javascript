@@ -66,3 +66,8 @@ list.lastElementChild.before(li);
 // Instead of moving the element we can clone
 const newLi = li.cloneNode(true);
 list.appendChild(li, newLi);
+
+// Removes list from DOM
+list.remove(); // Doesn't work in Internet Explorer
+// or
+list.parentElement.removeChild(list);
