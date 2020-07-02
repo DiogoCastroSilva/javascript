@@ -11,18 +11,32 @@ const LOG_EVENT_MOSTER_ATTACK = 'MOSTER_ATTACK';
 const LOG_EVENT_GAME_OVER = 'GAME_OVER';
 const LOG_EVENT_HEAL = 'HEAL';
 
-const enteredValue = prompt('Maximum life for you and the monster?', '100');
-let chossenMaxLife = parseInt(enteredValue);
+let chossenMaxLife;
+try {
+    chossenMaxLife = getMaxLifeValues();
+} catch (e) {
+    console.log(e);
+    chossenMaxLife = 100;
+}
 
 let currentMosterHealth = chossenMaxLife;
 let currentPlayerHealth = chossenMaxLife;
 let hasBonusLife = true;
 let battleLog = [];
 
-if (isNaN(chossenMaxLife) || chossenMaxLife <= 0) {
-    chossenMaxLife = 100;
-}
+
 adjustHealthBars(chossenMaxLife);
+
+function getMaxLifeValues() {
+    const enteredValue = prompt('Maximum life for you and the monster?', '100');
+    const parsedValue = parseInt(enteredValue);
+
+    if (isNaN(parsedValue) || parsedValue <= 0) {
+        throw { message: 'Invalid user input: Not a number'}
+    }
+
+    return parsedValue;
+}
 
 function attackMoster(mode = MODE_ATTACK) {
     if (isGameOver()) {
