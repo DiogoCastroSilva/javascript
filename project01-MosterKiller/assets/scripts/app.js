@@ -153,36 +153,46 @@ function writeToLog(event, value, mosterHealth, playerHealth) {
         mosterHealth: mosterHealth,
         playerHealth: playerHealth
     };
-    if (event === LOG_EVENT_GAME_OVER) {
-        logEntry = {
-            ...logEntry,
-            event: 'Game Over'
-        };
-    } else if (event === LOG_EVENT_HEAL) {
-        logEntry = {
-            ...logEntry,
-            event: 'Heal',
-            target: 'Player'
-        };
-    } else if (event === LOG_EVENT_MOSTER_ATTACK) {
-        logEntry = {
-            ...logEntry,
-            event: 'Moster Attack',
-            target: 'Player'
-        };
-    } else if (event === LOG_EVENT_PLAYER_ATTACK) {
-        logEntry = {
-            ...logEntry,
-            event: 'Player Attack',
-            target: 'Moster'
-        };
-    } else if (event === LOG_EVENT_PLAYER_STRONG_ATTACK) {
-        logEntry = {
-            ...logEntry,
-            event: 'Player Strong Attack',
-            target: 'Moster'
-        };
+
+    switch(event) {
+        case LOG_EVENT_GAME_OVER:
+            logEntry = {
+                ...logEntry,
+                event: 'Game Over'
+            };
+            break;
+        case LOG_EVENT_HEAL:
+            logEntry = {
+                ...logEntry,
+                event: 'Heal',
+                target: 'Player'
+            };
+            break;
+        case LOG_EVENT_MOSTER_ATTACK:
+            logEntry = {
+                ...logEntry,
+                event: 'Moster Attack',
+                target: 'Player'
+            };
+            break;
+        case LOG_EVENT_PLAYER_ATTACK:
+            logEntry = {
+                ...logEntry,
+                event: 'Player Attack',
+                target: 'Moster'
+            };
+            break;
+        case LOG_EVENT_PLAYER_STRONG_ATTACK:
+            logEntry = {
+                ...logEntry,
+                event: 'Player Strong Attack',
+                target: 'Moster'
+            };
+            break;
+        default:
+            logEntry = {};
     }
+
     battleLog.push(logEntry);
 }
 
