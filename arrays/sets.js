@@ -17,3 +17,10 @@ ids.delete(5); // [2, 3] -> No error
 for(const entry of ids.entries()) {
     console.log(entry);
 }
+
+
+// WeakSets -> has less methods
+const cow = { name: 'cow' };
+const animals = new WeakSet();
+animals.add(cow);
+
