@@ -17,6 +17,12 @@ const toogleMovieModal = () => {
     toogleBackdrop();
 };
 
+const clearMovieInput = () => {
+    for (const input of userInputs) {
+        input.value = '';
+    }
+};
+
 
 
 const backdropHandler = () => {
@@ -25,6 +31,7 @@ const backdropHandler = () => {
 
 const cancelModalHandler = () => {
     toogleMovieModal();
+    clearMovieInput();
 };
 
 const addMovieHandler = () => {
@@ -49,6 +56,8 @@ const addMovieHandler = () => {
     };
 
     movies.push(newMovie);
+    toogleMovieModal();
+    clearMovieInput();
 };
 
 
