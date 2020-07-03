@@ -5,6 +5,7 @@ const startAddMovieBtn = document.querySelector('header button');
 const backdrop = document.getElementById('backdrop');
 const userInputs = addMovieModal.querySelectorAll('input');
 const entryTextSection = document.getElementById('entry-text');
+const deleteMovieModal = document.getElementById('delete-modal');
 
 const movies = [];
 
@@ -38,8 +39,12 @@ const toogleBackdrop = () => {
     backdrop.classList.toggle('visible');
 };
 
-const toogleMovieModal = () => {
-    addMovieModal.classList.toggle('visible');
+const closeMovieModal = () => {
+    addMovieModal.classList.remove('visible');
+};
+
+const showMovieModal = () => {
+    addMovieModal.classList.add('visible');
     toogleBackdrop();
 };
 
@@ -49,14 +54,33 @@ const clearMovieInput = () => {
     }
 };
 
+const deleteMovie = id => {
+    const movieIndex = movies.findIndex(movie => movie.id == id);
+    movies.splice(movieIndex, 1);
+    const movieList = document.getElementById('movie-list');
+    // movieList.removeChild(movieList.children[movieIndex]);
+    // or
+    movieList.children[movieIndex].remove();
+
+    cancelDeleteMovieModal();
+};
+
+const cancelDeleteMovieModal = () => {
+    toogleBackdrop();
+    deleteMovieModal.classList.remove('visible');
+};
+
 
 
 const backdropHandler = () => {
-    toogleMovieModal();
+    closeMovieModal();
+    cancelDeleteMovieModal();
+    clearMovieInput();
 };
 
 const cancelModalHandler = () => {
-    toogleMovieModal();
+    closeMovieModal();
+    toogleBackdrop();
     clearMovieInput();
 };
 
@@ -76,30 +100,38 @@ const addMovieHandler = () => {
     }
 
     const newMovie = {
-        id: new Date().toString(),
+        id: new Date().getTime().toString(),
         title: titleValue,
         image: imageUrlValue,
         rating: ratingValue
     };
 
     movies.push(newMovie);
-    toogleMovieModal();
+    closeMovieModal();
+    toogleBackdrop();
     clearMovieInput();
     renderNewMovie(newMovie.id, newMovie.title, newMovie.image, newMovie.rating);
     updateEntryTextSection();
 };
 
 const deleteMovieHandler = id => {
-    const movieIndex = movies.findIndex(movie => movie.id == id);
-    delete movies[movieIndex];
-    const movieList = document.getElementById('movie-list');
-    // movieList.removeChild(movieList.children[movieIndex]);
-    // or
-    movieList.children[movieIndex].remove();
+    deleteMovieModal.classList.add('visible');
+    toogleBackdrop();
+    const cancelDeleteBtn = deleteMovieModal.querySelector('.btn--passive');
+    let comfirmDeleteBtn = deleteMovieModal.querySelector('.btn--danger');
+
+    comfirmDeleteBtn.replaceWith(comfirmDeleteBtn.cloneNode(true));
+    comfirmDeleteBtn = deleteMovieModal.querySelector('.btn--danger');
+
+    cancelDeleteBtn.removeEventListener('click', cancelDeleteMovieModal);
+    cancelDeleteBtn.addEventListener('click', cancelDeleteMovieModal);
+    comfirmDeleteBtn.addEventListener('click', deleteMovie.bind(null, id));
+    // closeMovieModal();
+    // deleteMovie(id);
 }
 
 
-startAddMovieBtn.addEventListener('click', toogleMovieModal);
+startAddMovieBtn.addEventListener('click', showMovieModal);
 backdrop.addEventListener('click', backdropHandler);
 cancelModalBtn.addEventListener('click', cancelModalHandler);
 comfirmAddMovieBtn.addEventListener('click', addMovieHandler);
