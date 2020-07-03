@@ -23,3 +23,6 @@ for (const [key, value] of personMapData.entries()) {
 for (const key of personMapData.keys()) {
     console.log(personMapData.get(key));
 }
+
+const personWeak = new WeakMap();
+personWeak.set(diogo);
