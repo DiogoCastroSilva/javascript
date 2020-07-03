@@ -16,7 +16,7 @@ const updateEntryTextSection = () => {
     }
 };
 
-const renderNewMovie = (title, imageUrl, rating) => {
+const renderNewMovie = (id, title, imageUrl, rating) => {
     const newMovieElement = document.createElement('li');
     newMovieElement.className = 'movie-element';
     newMovieElement.innerHTML = `
@@ -29,6 +29,7 @@ const renderNewMovie = (title, imageUrl, rating) => {
         </div>
     `;
 
+    newMovieElement.addEventListener('click', deleteMovieHandler.bind(null, id));
     const movieList = document.getElementById('movie-list');
     movieList.append(newMovieElement);
 };
@@ -75,6 +76,7 @@ const addMovieHandler = () => {
     }
 
     const newMovie = {
+        id: new Date().toString(),
         title: titleValue,
         image: imageUrlValue,
         rating: ratingValue
@@ -83,9 +85,18 @@ const addMovieHandler = () => {
     movies.push(newMovie);
     toogleMovieModal();
     clearMovieInput();
-    renderNewMovie(newMovie.title, newMovie.image, newMovie.rating);
+    renderNewMovie(newMovie.id, newMovie.title, newMovie.image, newMovie.rating);
     updateEntryTextSection();
 };
+
+const deleteMovieHandler = id => {
+    const movieIndex = movies.findIndex(movie => movie.id == id);
+    delete movies[movieIndex];
+    const movieList = document.getElementById('movie-list');
+    // movieList.removeChild(movieList.children[movieIndex]);
+    // or
+    movieList.children[movieIndex].remove();
+}
 
 
 startAddMovieBtn.addEventListener('click', toogleMovieModal);
