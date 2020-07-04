@@ -32,7 +32,7 @@ const renderMovies = (filter) => {
         //     }
         //     text += `${key}: ${info[key]}`;
         // }
-        
+
         movieElement.textContent = movie.getInfo();
         movieList.append(movieElement);
     });
@@ -58,7 +58,7 @@ const addMovieHandler = () => {
             [extraName]: extraValue
         },
         getInfo: function() {
-            return `${this.info.title} - ${extraName}:${this[extraName]}`
+            return `${this.info.title} - ${extraName}:${this.info[extraName]}`
         },
         id: new Date()
     };
