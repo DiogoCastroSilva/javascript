@@ -69,15 +69,16 @@ class ProductItem extends Component {
 }
 
 class ProductCollection extends Component {
-    products = [];
+    #products = [];
 
     constructor(hookId) {
-        super(hookId);
+        super(hookId, false);
+        this.render();
         this.fetchProducts();
     }
 
     fetchProducts() {
-        this.products = [
+        this.#products = [
             new Product(
                 'A Pillow',
                 'https://m.media-amazon.com/images/I/61wJMcvCKTL._SR500,500_.jpg',
@@ -95,7 +96,7 @@ class ProductCollection extends Component {
     }
 
     renderProducts() {
-        for(const product of this.products) {
+        for(const product of this.#products) {
             new ProductItem('prod-list', product);
         }
     }
@@ -107,7 +108,7 @@ class ProductCollection extends Component {
             [new ElementAttribute('id', 'prod-list')]
         );
 
-        if (this.products && this.products.length > 0) {
+        if (this.#products && this.#products.length > 0) {
             this.renderProducts();
         }
         
@@ -138,6 +139,10 @@ class Cart extends Component {
         this.cartItems = [...this.items, product]
     }
 
+    orderProducts() {
+        console.log('Orderirng...', this.items);
+    }
+
     render() {
         const cartElement = this.createRootElement('section', 'cart');
         cartElement.innerHTML = `
@@ -145,6 +150,8 @@ class Cart extends Component {
             <button>Order Now!</button>
         `;
 
+        const orderBtn = cartElement.querySelector('button');
+        orderBtn.addEventListener('click', () => this.orderProducts());
         this.totalElement = cartElement.querySelector('h2');
     }
 }
