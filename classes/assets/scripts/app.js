@@ -15,9 +15,14 @@ class ElementAttribute {
 }
 
 class Component {
-    constructor(renderHookId) {
+    constructor(renderHookId, isToRender = true) {
         this.hookId = renderHookId;
+        if (isToRender) {
+            this.render();
+        }
     }
+
+    render() {}
 
     createRootElement(tag, cssClasses, attributes) {
         const rootElement = document.createElement(tag);
@@ -34,9 +39,11 @@ class Component {
     }
 }
 
-class ProductItem {
-    constructor(product) {
+class ProductItem extends Component {
+    constructor(hookId, product) {
+        super(hookId, false);
         this.product = product;
+        this.render();
     }
 
     addToCart() {
@@ -44,8 +51,7 @@ class ProductItem {
     }
 
     render() {
-        const productElement = document.createElement('li');
-        productElement.className = 'product-item';
+        const productElement = this.createRootElement('li', 'product-item');
         productElement.innerHTML = `
             <div>
                 <img src="${this.product.imageUrl}" alt="${this.product.title}" />
@@ -59,35 +65,52 @@ class ProductItem {
         `;
         const addToCartBtn = productElement.querySelector('button');
         addToCartBtn.addEventListener('click', this.addToCart.bind(this));
-        return productElement;
     }
 }
 
-class ProductCollection {
-    products = [
-        new Product(
-            'A Pillow',
-            'https://m.media-amazon.com/images/I/61wJMcvCKTL._SR500,500_.jpg',
-            'A soft pillow.',
-            19.99
-        ),
-        new Product(
-            'A Carpet',
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT7ddh0wE4hPXO5_3zQtVs94NmbP3o6TnWRYixT029aQDDZjO9iqEQaB6iBgA&usqp=CAc',
-            'A carpet that you might like.',
-            600.97
-        )
-    ];
+class ProductCollection extends Component {
+    products = [];
+
+    constructor(hookId) {
+        super(hookId);
+        this.fetchProducts();
+    }
+
+    fetchProducts() {
+        this.products = [
+            new Product(
+                'A Pillow',
+                'https://m.media-amazon.com/images/I/61wJMcvCKTL._SR500,500_.jpg',
+                'A soft pillow.',
+                19.99
+            ),
+            new Product(
+                'A Carpet',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT7ddh0wE4hPXO5_3zQtVs94NmbP3o6TnWRYixT029aQDDZjO9iqEQaB6iBgA&usqp=CAc',
+                'A carpet that you might like.',
+                600.97
+            )
+        ];
+        this.render();
+    }
+
+    renderProducts() {
+        for(const product of this.products) {
+            new ProductItem('prod-list', product);
+        }
+    }
 
     render() {
-        const productListElement = document.createElement('ul');
-        productListElement.className = 'product-list';
+        const productListElement = this.createRootElement(
+            'ul',
+            'product-list',
+            [new ElementAttribute('id', 'prod-list')]
+        );
 
-        for(const product of this.products) {
-            const productItem = new ProductItem(product);
-            productListElement.append(productItem.render());
+        if (this.products && this.products.length > 0) {
+            this.renderProducts();
         }
-
+        
         return productListElement;
     }
 }
@@ -102,7 +125,6 @@ class Cart extends Component {
     set cartItems(value) {
         this.items = value;
         this.totalElement.innerHTML = `<h2>Total: \$${this.totalAmount.toFixed(2)}</h2>`;
-        return this;
     }
 
     get totalAmount () {
@@ -124,21 +146,14 @@ class Cart extends Component {
         `;
 
         this.totalElement = cartElement.querySelector('h2');
-        return this;
     }
 }
 
 class Shop {
-
     render() {
-        const renderHook = document.getElementById('app');
-
         this.cart = new Cart('app');
-        this.cart.render();
-        const productList = new ProductCollection();
-        const productListElement = productList.render();
-
-        renderHook.append(productListElement);
+        new ProductCollection('app');
+        return this;
     }
 }
 
@@ -146,8 +161,7 @@ class App {
     static cart;
 
     static init() {
-        const shop = new Shop();
-        shop.render();
+        const shop = new Shop().render();
         this.cart = shop.cart;
     }
 
