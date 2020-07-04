@@ -24,15 +24,16 @@ const renderMovies = (filter) => {
         const movieElement = document.createElement('li');
         const { info } = movie;
         const { title } = info;
+
+        // let text = title + ' - ';
+        // for (const key in info) {
+        //     if (key == 'title') {
+        //         continue;
+        //     }
+        //     text += `${key}: ${info[key]}`;
+        // }
         
-        let text = title + ' - ';
-        for (const key in info) {
-            if (key == 'title') {
-                continue;
-            }
-            text += `${key}: ${info[key]}`;
-        }
-        movieElement.textContent = text;
+        movieElement.textContent = movie.getInfo();
         movieList.append(movieElement);
     });
 };
@@ -55,6 +56,9 @@ const addMovieHandler = () => {
         info: {
             title: title,
             [extraName]: extraValue
+        },
+        getInfo: function() {
+            return `${this.info.title} - ${extraName}:${this[extraName]}`
         },
         id: new Date()
     };
