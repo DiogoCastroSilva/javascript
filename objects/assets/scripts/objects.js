@@ -17,7 +17,7 @@ const renderMovies = (filter) => {
     movieList.innerHTML = '';
 
     const filterMovies = filter
-        ? movies.filter(movie => movie.info.title.includes(filter))
+        ? movies.filter(movie => movie.info.title.toLowerCase().includes(filter.toLowerCase()))
         : movies;
 
     filterMovies.forEach(movie => {
