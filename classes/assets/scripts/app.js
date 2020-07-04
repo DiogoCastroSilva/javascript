@@ -41,14 +41,14 @@ class ProductCollection {
         new Product(
             'A Pillow',
             'https://m.media-amazon.com/images/I/61wJMcvCKTL._SR500,500_.jpg',
-            19.99,
-            'A soft pillow.'
+            'A soft pillow.',
+            19.99
         ),
         new Product(
             'A Carpet',
             'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT7ddh0wE4hPXO5_3zQtVs94NmbP3o6TnWRYixT029aQDDZjO9iqEQaB6iBgA&usqp=CAc',
-            600.97,
-            'A carpet that you might like.'
+            'A carpet that you might like.',
+            600.97
         )
     ];
 
@@ -68,9 +68,20 @@ class ProductCollection {
 class Cart {
     items = [];
 
+    set cartItems(value) {
+        this.items = value;
+        this.totalElement.innerHTML = `<h2>Total: \$${this.totalAmount.toFixed(2)}</h2>`;
+    }
+
+    get totalAmount () {
+        return this.items.reduce(
+            (prevPrice, item) => prevPrice + item.price,
+            0
+        );
+    }
+
     addProduct(product) {
-        this.items.push(product);
-        this.totalElement.innerHTML = `<h2>Total: \$${1}</h2>`;
+        this.cartItems = [...this.items, product]
     }
 
     render() {
@@ -101,6 +112,8 @@ class Shop {
 }
 
 class App {
+    static cart;
+
     static init() {
         const shop = new Shop();
         shop.render();
