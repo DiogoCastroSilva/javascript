@@ -12,9 +12,10 @@
 function Person() {
     this.name = 'Max';
     this.age = 30;
-    this.great = function() {
-        console.log('Hi');
-    }
+}
+
+Person.prototype.great = function() {
+    console.log('Hi!');
 }
 
 const max = new Person();
