@@ -13,4 +13,5 @@ This was built follwing the tutorial in Udemy <a href="https://www.udemy.com/cou
     <li><a href="/DOM/">DOM</a></li>
     <li><a href="/arrays/">Arrays</a></li>
     <li><a href="/objects/">Objects</a></li>
+    <li><a href="/classes/">Classes</a></li>
 </ol>
