@@ -153,9 +153,19 @@ class App {
         // someScript.textContent = 'alert("Hi there!")';
         // document.head.append(someScript);
 
-        document.getElementById('analytics-btn').addEventListener('click', () => {
+        // After 3s passes execute function
+        const timerID = setTimeout(this.startAnalytics, 3000);
+        // Runs function every 3s
+        const intervaleId = setInterval(() => {
             this.startAnalytics();
+        }, 3000);
+
+        document.getElementById('stop-analytics-btn').addEventListener('click', () => {
+            clearTimeout(timerID);
+            clearInterval(intervaleId);
         });
+
+       
     };
 
     static startAnalytics() {
