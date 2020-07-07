@@ -16,8 +16,8 @@ const mouseEnterHandler = event => {
 // button.onclick = buttonClickHandler;
 
 // Best approach
-// const button = document.querySelector('button');
-// button.addEventListener('click', buttonClickHandler);
+const button = document.querySelector('button');
+button.addEventListener('click', buttonClickHandler);
 
 // Understanding events
 // const buttons = document.querySelectorAll('button');
@@ -57,4 +57,7 @@ const btn = document.querySelectorAll('button')[0].addEventListener('click', (e)
 const list = document.querySelector('ul').addEventListener('click', e => {
     // e.target.classList.toggle('highlight');
     e.target.closest('li').classList.toggle('highlight');
+    // form.click();
+    // or
+    button.click();
 });
