@@ -55,5 +55,6 @@ const btn = document.querySelectorAll('button')[0].addEventListener('click', (e)
 
 // Better performance - Event delegation
 const list = document.querySelector('ul').addEventListener('click', e => {
-    e.target.classList.toggle('highlight');
+    // e.target.classList.toggle('highlight');
+    e.target.closest('li').classList.toggle('highlight');
 });
