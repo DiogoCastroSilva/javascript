@@ -84,6 +84,7 @@ class ProjectItem {
     this.updateProjectListsHandler = updateProjectListsFunction;
     this.connectMoreInfoButton();
     this.connectSwitchButton(type);
+    this.connectDrag();
   }
 
   showMoreInfoHandler() {
@@ -126,6 +127,20 @@ class ProjectItem {
     this.updateProjectListsHandler = updateProjectListsFn;
     this.connectSwitchButton(type);
   }
+
+  connectDrag() {
+    const item = document.getElementById(this.id);
+
+    item.addEventListener('dragstart', event => {
+      event.dataTransfer.setData('text/plain', this.id);
+      event.dataTransfer.effectAllowed = 'move';
+    });
+
+    item.addEventListener('dragend', event => {
+
+    });
+  }
+
 }
 
 class ProjectList {
@@ -139,7 +154,7 @@ class ProjectList {
         new ProjectItem(prjItem.id, this.switchProject.bind(this), this.type)
       );
     }
-    console.log(this.projects);
+    this.connectDropable();
   }
 
   setSwitchHandlerFunction(switchHandlerFunction) {
@@ -158,6 +173,44 @@ class ProjectList {
     this.switchHandler(this.projects.find(p => p.id === projectId));
     this.projects = this.projects.filter(p => p.id !== projectId);
   }
+
+  connectDropable() {
+    const list = document.querySelector(`#${this.type}-projects ul`);
+
+    list.addEventListener('dragenter', e => {
+      if (e.dataTransfer.types[0] === 'text/plain') {
+        list.parentElement.classList.add('droppable');
+        e.preventDefault();
+      }
+    });
+    
+    list.addEventListener('dragover', e => {
+      if (e.dataTransfer.types[0] === 'text/plain') {
+        e.preventDefault();
+      }
+    });
+
+    list.addEventListener('dragleave', e => {
+      if (e.relatedTarget.closest && e.relatedTarget.closest(`#${this.type}-projects ul`) !== list) {
+        list.parentElement.classList.remove('droppable');
+      }
+    });
+
+    list.addEventListener('drop', e => {
+      event.preventDefault
+      const projectId = e.dataTransfer.getData('text/plain');
+      if (this.projects.find(p => p.id === projectId)) {
+        return;
+      }
+      document
+          .getElementById(projectId)
+          .querySelector('button:last-of-type')
+          .click();
+      list.parentElement.classList.remove('droppable'); 
+      
+    });
+
+  }
 }
 
 class App {
@@ -170,12 +223,6 @@ class App {
     finishedProjectsList.setSwitchHandlerFunction(
       activeProjectsList.addProject.bind(activeProjectsList)
     );
-
-    const timerId = setTimeout(this.startAnalytics, 3000);
-
-    document.getElementById('stop-analytics-btn').addEventListener('click', () => {
-      clearTimeout(timerId);
-    });
   }
 
   static startAnalytics() {
