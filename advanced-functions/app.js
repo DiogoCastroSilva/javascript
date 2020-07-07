@@ -31,3 +31,22 @@ function printHobbies(h) {
 
 printHobbies(hobbies);
 console.log(hobbies); // ['Sports', 'Cooking', 'Singing'];
+
+
+// Factory function
+function createTaxCalculator(tax) {
+    function calculateTax(ammount) {
+        return ammount * tax;
+    }
+
+    return calculateTax;
+}
+
+// const vatAmmount = calculateTax(100, 0.19);
+// const incomeTax = calculateTax(100, 0.25);
+
+const calculateVATCalculator = createTaxCalculator(0.19);
+const calculateIncomeTax = createTaxCalculator(0.25);
+
+console.log(calculateVATCalculator(100));
+console.log(calculateVATCalculator(200));
