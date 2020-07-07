@@ -1,10 +1,10 @@
 
 
-const buttonClickHandler = () => {
-    console.log('Button clicked...');
+const buttonClickHandler = (event) => {
+    console.log('Button clicked...', event);
 
     // Removing event listener
-    button.removeEventListener('click', buttonClickHandler);
+    // button.removeEventListener('click', buttonClickHandler);
 };
 
 
