@@ -43,4 +43,17 @@ const div = document.querySelector('div').addEventListener('click', (e) => {
 const btn = document.querySelectorAll('button')[0].addEventListener('click', (e) => {
     e.stopPropagation();
     console.log('btn', e);
-})
+});
+
+// Bad performance
+// const listItems = document.querySelectorAll('li');
+// listItems.forEach(item => {
+//     item.addEventListener('click', e => {
+//         e.target.classList.toggle('highlight');
+//     });
+// });
+
+// Better performance - Event delegation
+const list = document.querySelector('ul').addEventListener('click', e => {
+    e.target.classList.toggle('highlight');
+});
