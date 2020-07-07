@@ -14,4 +14,6 @@ This was built follwing the tutorial in Udemy <a href="https://www.udemy.com/cou
     <li><a href="/arrays/">Arrays</a></li>
     <li><a href="/objects/">Objects</a></li>
     <li><a href="/classes/">Classes</a></li>
+    <li><a href="/events/">Events</a></li>
+    <li><a href="/advanced-functions/">Advanced Functions</a></li>
 </ol>
