@@ -34,3 +34,13 @@ form.addEventListener('submit', event => {
     console.log(event);
     event.preventDefault();
 });
+
+
+const div = document.querySelector('div').addEventListener('click', (e) => {
+    console.log('div', e);
+}/* , true */);
+
+const btn = document.querySelectorAll('button')[0].addEventListener('click', (e) => {
+    e.stopPropagation();
+    console.log('btn', e);
+})
