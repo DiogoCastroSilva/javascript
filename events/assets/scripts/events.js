@@ -16,8 +16,8 @@ const mouseEnterHandler = event => {
 // button.onclick = buttonClickHandler;
 
 // Best approach
-const button = document.querySelector('button');
-button.addEventListener('click', buttonClickHandler);
+// const button = document.querySelector('button');
+// button.addEventListener('click', buttonClickHandler);
 
 // Understanding events
 // const buttons = document.querySelectorAll('button');
@@ -29,21 +29,21 @@ button.addEventListener('click', buttonClickHandler);
 //     console.log(event);
 // });
 
-const form = document.querySelector('form');
-form.addEventListener('submit', event => {
-    console.log(event);
-    event.preventDefault();
-});
+// const form = document.querySelector('form');
+// form.addEventListener('submit', event => {
+//     console.log(event);
+//     event.preventDefault();
+// });
 
 
-const div = document.querySelector('div').addEventListener('click', (e) => {
-    console.log('div', e);
-}/* , true */);
+// const div = document.querySelector('div').addEventListener('click', (e) => {
+//     console.log('div', e);
+// }/* , true */);
 
-const btn = document.querySelectorAll('button')[0].addEventListener('click', (e) => {
-    e.stopPropagation();
-    console.log('btn', e);
-});
+// const btn = document.querySelectorAll('button')[0].addEventListener('click', (e) => {
+//     e.stopPropagation();
+//     console.log('btn', e);
+// });
 
 // Bad performance
 // const listItems = document.querySelectorAll('li');
@@ -54,10 +54,18 @@ const btn = document.querySelectorAll('button')[0].addEventListener('click', (e)
 // });
 
 // Better performance - Event delegation
-const list = document.querySelector('ul').addEventListener('click', e => {
+const list = document.querySelector('ul').addEventListener('click', function (e) {
     // e.target.classList.toggle('highlight');
     e.target.closest('li').classList.toggle('highlight');
     // form.click();
     // or
     button.click();
+
+    console.log(this); // <ul></ul>
+});
+
+const button = document.querySelector('button');
+button.addEventListener('click', function(e) {
+    console.log('btn', e);
+    console.log(this); // <button>Click me</button>
 });
