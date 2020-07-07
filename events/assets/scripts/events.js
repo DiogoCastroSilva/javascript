@@ -20,11 +20,17 @@ const mouseEnterHandler = event => {
 // button.addEventListener('click', buttonClickHandler);
 
 // Understanding events
-const buttons = document.querySelectorAll('button');
-buttons.forEach(btn => btn.addEventListener('click', buttonClickHandler));
-buttons[0].addEventListener('mouseenter', mouseEnterHandler);
+// const buttons = document.querySelectorAll('button');
+// buttons.forEach(btn => btn.addEventListener('click', buttonClickHandler));
+// buttons[0].addEventListener('mouseenter', mouseEnterHandler);
 
 
-window.addEventListener('scroll', event => {
+// window.addEventListener('scroll', event => {
+//     console.log(event);
+// });
+
+const form = document.querySelector('form');
+form.addEventListener('submit', event => {
     console.log(event);
+    event.preventDefault();
 });
