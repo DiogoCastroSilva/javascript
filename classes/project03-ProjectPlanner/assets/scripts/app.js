@@ -148,7 +148,23 @@ class App {
         const finishedProjectList = new ProjectCollection('finished');
         activeProjectList.setSwitchHandler(finishedProjectList.addProject.bind(finishedProjectList));
         finishedProjectList.setSwitchHandler(activeProjectList.addProject.bind(activeProjectList));
+
+        // const someScript = document.createElement('script');
+        // someScript.textContent = 'alert("Hi there!")';
+        // document.head.append(someScript);
+
+        document.getElementById('analytics-btn').addEventListener('click', () => {
+            this.startAnalytics();
+        });
     };
+
+    static startAnalytics() {
+        const analyticsScript = document.createElement('script');
+        analyticsScript.src = 'assets/scripts/analytics.js';
+        analyticsScript.defer = true;
+
+        document.head.append(analyticsScript);
+    }
 }
 
 App.init();
