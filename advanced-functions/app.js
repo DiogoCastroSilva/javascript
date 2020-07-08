@@ -50,3 +50,20 @@ const calculateIncomeTax = createTaxCalculator(0.25);
 
 console.log(calculateVATCalculator(100));
 console.log(calculateVATCalculator(200));
+
+// Closures
+let userName = 'Max';
+function greetUser() {
+    console.log(`Hi ${userName}`);
+}
+greetUser(); // Hi Max
+userName = 'Manuel';
+greetUser(); // Hi Manuel
+
+
+function greetUser1() {
+    let name = 'Manuel';
+    console.log(`Hi ${name}`);
+}
+let name = 'Max';
+greetUser(); // Hi Manuel
