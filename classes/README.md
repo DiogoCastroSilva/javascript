@@ -6,5 +6,5 @@ Tutorial of how to use Classes in Javascript
 
 <ol>
     <li>Classes basics application</li>
-    <li><a href="/project03-ProjectPlanner/">Using classes in project - Project Planner</a></li>
+    <li><a href="project03-ProjectPlanner">Using classes in project - Project Planner</a></li>
 </ol>
