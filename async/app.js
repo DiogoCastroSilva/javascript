@@ -24,6 +24,9 @@ function trackUserHandler() {
       positionData = positData;
       return setTimer(2000);
     })
+    .catch(error => {
+      console.log(error);
+    })
     .then(data => {
       console.log(data, positionData);
     });
