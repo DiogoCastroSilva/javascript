@@ -16,27 +16,13 @@ const getPosition = (opts) => {
   return promise;
 };
 
-function trackUserHandler() {
-  // Async operation
-  let positionData;
-  getPosition()
-    .then(positData => {
-      positionData = positData;
-      return setTimer(2000);
-    })
-    .catch(error => {
-      console.log(error);
-    })
-    .then(data => {
-      console.log(data, positionData);
-    });
-    // Will run second
-    setTimer(1000).then(() => {
-      console.log('Timer done!');
-    });
-
-  // Will run first
+// Async/Await uses Promises behind the scenes
+async function trackUserHandler() {
   console.log('Getting position...');
+  // Async operation
+  const positionData = await getPosition()
+  const data = await setTimer(2000);
+  console.log(data, positionData);
 }
 
 button.addEventListener('click', trackUserHandler);
