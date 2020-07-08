@@ -38,3 +38,33 @@ Math.random();
 function randomIntBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+
+// Strings
+// "", '', ``
+"".length // 0
+"a".toUpperCase(); // 'A'
+"A".toLowerCase(); // 'a'
+"Hello".toLowerCase().startsWith('he'); // true
+
+// Tagged Templates
+function productDescription(string, name, price) {
+    const category = price > 20 ? 'fair' : 'cheap';
+    return `${string[0]}${name}${string[1]}${category}${string[2]}`;
+}
+
+const productName = 'Javascript Course';
+const productPrice = 29.99;
+const productOutput = productDescription`This product (${productName} is ${productPrice})`;
+
+// Regex
+const userInput = 'testest.com';
+// const regex = new RegExp();
+const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+console.log(emailRegex.test(userInput)); // false
+console.log(emailRegex.test('diogo@diogo.com')); // true
+
+const hashello = /hello/;
+console.log(hashello.test('Hi, hello, ...')); // true
+const hasHhello = /(h|H)ello/; // Starts with hello ot Hello
+console.log(hasHhello.test('has Hello, ...')); // true
