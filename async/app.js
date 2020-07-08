@@ -19,10 +19,18 @@ const getPosition = (opts) => {
 // Async/Await uses Promises behind the scenes
 async function trackUserHandler() {
   console.log('Getting position...');
-  // Async operation
-  const positionData = await getPosition()
-  const data = await setTimer(2000);
-  console.log(data, positionData);
+  let positionData;
+  let data;
+  try {
+    // Async operation
+    positionData = await getPosition()
+    data = await setTimer(2000);
+  } catch(error) {
+    console.log(error);
+  } finally {
+    console.log(data, positionData);
+  }
+  
 }
 
 button.addEventListener('click', trackUserHandler);
