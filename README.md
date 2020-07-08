@@ -17,4 +17,5 @@ This was built follwing the tutorial in Udemy <a href="https://www.udemy.com/cou
     <li><a href="/classes/">Classes</a></li>
     <li><a href="/events/">Events</a></li>
     <li><a href="/advanced-functions/">Advanced Functions</a></li>
+    <li><a href="/numbers-strings/">Numbers and Strings</a></li>
 </ol>
