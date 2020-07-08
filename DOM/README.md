@@ -6,5 +6,5 @@ Tutorial of how to use DOM (Document Object Model)
 
 <ol>
     <li>DOM basics</li>
-    <li><a href="/project02-FavouriteMovies">DOM project - Favourite Movies</a></li>
+    <li><a href="project02-FavouriteMovies">DOM project - Favourite Movies</a></li>
 </ol>
