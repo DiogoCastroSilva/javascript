@@ -1,16 +1,36 @@
 const button = document.querySelector('button');
 const output = document.querySelector('p');
 
+
+const getPosition = (opts) => {
+  const promise = new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      positionData => {
+        resolve(positionData);
+      },
+      error => {
+        reject(error);
+      },
+      opts);
+  });
+  return promise;
+};
+
 function trackUserHandler() {
   // Async operation
-  navigator.geolocation.getCurrentPosition(
-    data => {
-      console.log(data);
-    },
-    error => {
-      console.log(error);
-    }
-  );
+  let positionData;
+  getPosition()
+    .then(positData => {
+      positionData = positData;
+      return setTimer(2000);
+    })
+    .then(data => {
+      console.log(data, positionData);
+    });
+    // Will run second
+    setTimer(1000).then(() => {
+      console.log('Timer done!');
+    });
 
   // Will run first
   console.log('Getting position...');
@@ -25,3 +45,11 @@ button.addEventListener('click', trackUserHandler);
 // console.log(result);
 // button.click(); // runs after the console.log so takes some time, Javascript is single thread
 
+// Promises
+const setTimer = (duration) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('Done!');
+    }, duration);
+  });
+};
