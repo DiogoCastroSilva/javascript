@@ -50,3 +50,27 @@ const setTimer = (duration) => {
     }, duration);
   });
 };
+
+// Runs the faster promise
+Promise.race([
+  getPosition(),
+  setTimer(1000)
+]).then(data => {
+  console.log(data);
+});
+
+// Runs all at the same time, if one fails, all fails
+Promise.all([
+  getPosition(),
+  setTimer(2000)
+]).then(data => {
+  console.log(data); // [promise1, promise2] -> [position, timer]
+});
+
+// Runs all at the same time, if one fails, still returns the other
+Promise.allSettled([
+  getPosition(),
+  setTimer(2000)
+]).then(data => {
+  console.log(data)
+});
