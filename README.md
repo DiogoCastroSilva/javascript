@@ -6,13 +6,14 @@ This was built follwing the tutorial in Udemy <a href="https://www.udemy.com/cou
 ## Tutorial Sections
 
 <ol>
-    <li><a href="/basics">Introduction / Basics</a></li>
+    <li><a href="/basics/">Introduction / Basics</a></li>
     <li><a href="/project01-MosterKiller/">Control structures - Moster Killer project</a></li>
     <li><a href="/es6+/">New javascript ES6+</a></li>
     <li><a href="/functions/">Functions</a></li>
     <li><a href="/DOM/">DOM</a></li>
     <li><a href="/arrays/">Arrays</a></li>
     <li><a href="/objects/">Objects</a></li>
+    <li><a href="/prototypes/">Prototypes</a></li>
     <li><a href="/classes/">Classes</a></li>
     <li><a href="/events/">Events</a></li>
     <li><a href="/advanced-functions/">Advanced Functions</a></li>
