@@ -11,8 +11,15 @@ function sendHttpRequest(method, url, data = undefined) {
         xhr.open(method, url);
         xhr.responseType = 'json';
         xhr.onload = () => {
-            resolve(xhr.response);
+            if (xhr.status >= 200 && xhr.status < 300) {
+                resolve(xhr.response);
+            } else {
+                reject(new Error('Something went wrong'));
+            }
             // const listOfPosts = JSON.parse(xhr.response);
+        };
+        xhr.onerror = () => {
+            reject('Failed to send request');
         };
         xhr.send(JSON.stringify(data));
     });
@@ -21,10 +28,13 @@ function sendHttpRequest(method, url, data = undefined) {
 
 
 async function fetchPosts() {
-    const responseData = await sendHttpRequest('GET', 'https://jsonplaceholder.typicode.com/posts');
-
-    for (const post of responseData) {
-        appendPost(post);
+    try {
+        const responseData = await sendHttpRequest('GET', 'https://jsonplaceholder.typicode.com/posts');
+        for (const post of responseData) {
+            appendPost(post);
+        }
+    } catch(e) {
+        alert(e.message);
     }
 }
 
@@ -36,9 +46,14 @@ async function createPost(title, content) {
         userId: userId,
     };
 
-    const response = await sendHttpRequest('POST', 'https://jsonplaceholder.typicode.com/posts', post);
-    post.id = response.id
-    appendPost(post);
+    try {
+        const response = await sendHttpRequest('POST', 'https://jsonplaceholder.typicode.com/posts', post);
+        post.id = response.id
+        appendPost(post);
+    } catch(e) {
+        alert(e.message);
+    }
+    
 }
 
 function appendPost(post) {
