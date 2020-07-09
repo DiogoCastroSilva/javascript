@@ -1,5 +1,7 @@
 const listElement = document.querySelector('.posts');
 const postElement = document.getElementById('single-post');
+const form = document.querySelector('#new-post form');
+const fetchBtn = document.querySelector('#available-posts button');
 
 
 function sendHttpRequest(method, url, data = undefined) {
@@ -44,6 +46,12 @@ function appendPost(post) {
     listElement.append(postNode);
 }
 
-fetchPosts();
-createPost('title', 'new post');
 
+fetchBtn.addEventListener('click', fetchPosts);
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const enteredTitle = e.currentTarget.querySelector('#title').value;
+    const enteredContent = e.currentTarget.querySelector('#content').value;
+
+    createPost(enteredTitle, enteredContent);
+});
