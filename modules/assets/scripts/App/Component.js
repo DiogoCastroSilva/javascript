@@ -1,4 +1,3 @@
-
 export class Component {
     constructor(hostElementId, insertBefore = false) {
       if (hostElementId) {
