@@ -1,22 +1,23 @@
+/* eslint-disable no-console */
 const button = document.querySelector('button');
 
 // button.onclick = function() {
 
 // };
 
-const buttonClickHandler = event => {
-  // event.target.disabled = true;
-  console.log(event);
-};
+// const buttonClickHandler = event => {
+//   // event.target.disabled = true;
+//   console.log(event);
+// };
 
-const anotherButtonClickHandler = () => {
-  console.log('This was clicked!');
-};
+// const anotherButtonClickHandler = () => {
+//   console.log('This was clicked!');
+// };
 
 // button.onclick = buttonClickHandler;
 // button.onclick = anotherButtonClickHandler;
 
-const boundFn = buttonClickHandler.bind(this);
+// const boundFn = buttonClickHandler.bind(this);
 
 // button.addEventListener('click', buttonClickHandler);
 
@@ -46,14 +47,16 @@ div.addEventListener('mouseenter', event => {
   console.log(event);
 });
 
+// eslint-disable-next-line func-names
 button.addEventListener('click', function(event) {
   event.stopPropagation();
   console.log('CLICKED BUTTON');
   console.log(event);
+  // eslint-disable-next-line no-invalid-this
   console.log(this);
 });
 
-const listItems = document.querySelectorAll('li');
+// const listItems = document.querySelectorAll('li');
 const list = document.querySelector('ul');
 
 // listItems.forEach(listItem => {
@@ -62,11 +65,13 @@ const list = document.querySelector('ul');
 //   });
 // });
 
+// eslint-disable-next-line func-names
 list.addEventListener('click', function(event) {
   // console.log(event.currentTarget);
   // event.target.classList.toggle('highlight');
   event.target.closest('li').classList.toggle('highlight');
   // form.submit();
   button.click();
+  // eslint-disable-next-line no-invalid-this
   console.log(this);
 });
