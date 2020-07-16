@@ -1,4 +1,4 @@
-import { Component } from './Component.js';
+import { Component } from './Component';
 
 
 export class Tooltip extends Component {
@@ -7,19 +7,21 @@ export class Tooltip extends Component {
       this.closeNotifier = closeNotifierFunction;
       this.text = text;
       this.create();
+
+      this.closeTooltip = () => {
+        this.detach();
+        this.closeNotifier();
+      };
     }
-  
-    closeTooltip = () => {
-      this.detach();
-      this.closeNotifier();
-    };
-  
+
+
     create() {
-      const tooltipElement = document.createElement('div');
-      tooltipElement.className = 'card';
       const tooltipTemplate = document.getElementById('tooltip');
       const tooltipBody = document.importNode(tooltipTemplate.content, true);
+      const tooltipElement = document.createElement('div');
+
       tooltipBody.querySelector('p').textContent = this.text;
+      tooltipElement.className = 'card';
       tooltipElement.append(tooltipBody);
   
       const hostElPosLeft = this.hostElement.offsetLeft;
