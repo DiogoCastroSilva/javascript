@@ -3,14 +3,14 @@ const CleanPlugin = require('clean-webpack-plugin');
 
 // eslint-disable-next-line no-undef
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry: './src/app.js',
     output: {
-        filename: 'app.js',
+        filename: '[contenthash].js',
         path: path.resolve(__dirname, 'assets', 'scripts'),
         publicPath: 'assets/scripts/'
     },
-    devtool: 'cheap-module-source-map',
+    devtool: 'cheap-source-map',
     plugins: [
         new CleanPlugin.CleanWebpackPlugin()
     ]
