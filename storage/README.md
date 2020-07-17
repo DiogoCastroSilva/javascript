@@ -1,6 +1,6 @@
 # Storage
 
-How to storage data in the browser, using:
+How to use storage data in the browser, using:
 <br />
 <ol>
     <li>Local Storage</li>
