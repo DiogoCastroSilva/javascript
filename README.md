@@ -22,4 +22,6 @@ This was built follwing the tutorial in Udemy <a href="https://www.udemy.com/cou
     <li><a href="/library/">Using libraries</a></li>
     <li><a href="/modules/">Modules</a></li>
     <li><a href="/workflows/">Workflows</a></li>
+    <li><a href="/storage/">Browser Storage</a></li>
+    <li><a href="/browser-support/">Browser Support</a></li>
 </ol>
