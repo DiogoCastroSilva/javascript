@@ -5,5 +5,5 @@ How to storage data in the browser, using:
 <ol>
     <li>Local Storage</li>
     <li>Cookies</li>
-    <li>Index DB</li>
+    <li>Indexed DB</li>
 </ol>
