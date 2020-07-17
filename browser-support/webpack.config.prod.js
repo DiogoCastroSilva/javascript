@@ -10,6 +10,29 @@ module.exports = {
     publicPath: 'assets/scripts/'
   },
   devtool: 'cheap-source-map',
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules)/,
+        use: {
+          // Compiles files, analysing files and using polyfill
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  useBuiltIns: 'usage',
+                  corejs: { version: 3 }
+                }
+              ]
+            ]
+          }
+        }
+      }
+    ]
+  },
   // devServer: {
   //   contentBase: './'
   // }
