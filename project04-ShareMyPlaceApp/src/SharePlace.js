@@ -11,7 +11,7 @@ class PlaceFinder {
 
         locateUserBtn.addEventListener('click', this.locateUserHandler.bind(this));
         addressForm.addEventListener('submit', this.findAddressHandler.bind(this));
-        this.shareBtn.addEventListener('click');
+        this.shareBtn.addEventListener('click', this.shareplaceHandler);
     }
 
     selectPlace(coordinates, address) {
@@ -68,6 +68,19 @@ class PlaceFinder {
             modal.hide();
         }
         
+    }
+
+    shareplaceHandler() {
+        const shareLinkInputElement = document.getElementById('share-link');
+        if (!navigator.clipboard) {
+            shareLinkInputElement.select();
+            return;
+        }
+
+        navigator.clipboard.writeText(shareLinkInputElement.value)
+            .catch(err => {
+                console.log(err);
+            });
     }
 }
 
