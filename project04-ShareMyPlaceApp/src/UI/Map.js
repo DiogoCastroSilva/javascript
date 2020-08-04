@@ -17,7 +17,7 @@ export class Map {
 
         document.getElementById('map').innerHTML = ''; // clear the <p> in the <div id="map">
 
-        new olMap({
+        const map =new olMap({
             target: 'map',
             layers: [
                 new TileLayer({
