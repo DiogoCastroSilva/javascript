@@ -1,23 +1,28 @@
 import { Modal } from './UI/Modal';
 import { Map } from './UI/Map';
-import { getCoordFromAddress } from './Utility/Location';
+import { getCoordFromAddress, simpleReverseGeocoding } from './Utility/Location';
 
 
 class PlaceFinder {
     constructor() {
         const addressForm = document.querySelector('form');
         const locateUserBtn = document.getElementById('locate-btn');
+        this.shareBtn = document.getElementById('share-btn');
 
         locateUserBtn.addEventListener('click', this.locateUserHandler.bind(this));
         addressForm.addEventListener('submit', this.findAddressHandler.bind(this));
+        this.shareBtn.addEventListener('click');
     }
 
-    selectPlace(coordinates) {
+    selectPlace(coordinates, address) {
         if (this.map) {
             this.map.render(coordinates);
         } else {
             this.map = new Map(coordinates);
         }
+        this.shareBtn.disabled = false;
+        const shareLinkInputElement = document.getElementById('share-link');
+        shareLinkInputElement.value = `${location.origin}/my-place?address=${encodeURI(address)}&lat=${coordinates.lat}&lng=${coordinates.lng}`;
     }
 
     locateUserHandler() {
@@ -29,15 +34,14 @@ class PlaceFinder {
         const modal = new Modal('loading-modal-content', 'Loading location, please wait...');
         modal.show();
 
-        navigator.geolocation.getCurrentPosition(successResult => {
+        navigator.geolocation.getCurrentPosition(async successResult => {
             modal.hide();
             const coordinates = {
                 lat: successResult.coords.latitude,
                 lng: successResult.coords.longitude
             };
-
-            console.log(coordinates);
-            this.selectPlace(coordinates);
+            const address = await simpleReverseGeocoding(coordinates.lng, coordinates.lat);
+            this.selectPlace(coordinates, address);
         }, () => {
             alert('Could not locate you, please enter a address manually.');
             modal.hide();
