@@ -32,6 +32,16 @@ const company = {
             this.currentEmployee++;
         }
         return returnValue
+    },
+    // Generator
+    getEmployee: function* employeeGenerator() {
+        let currentEmployee = 0;
+        while(currentEmployee < this.employees.length) {
+            // Pauses and returns value
+            // When next is called will continue from last point
+            yield this.employees[currentEmployee];
+            currentEmployee++;
+        }
     }
 };
 
@@ -40,3 +50,10 @@ console.log(company.next());
 console.log(company.next());
 console.log(company.next());
 console.log(company.next());
+
+// Custom Iterator using a generator
+const iterator = company.getEmployee();
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
