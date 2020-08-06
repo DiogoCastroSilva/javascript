@@ -57,3 +57,19 @@ console.log(iterator.next());
 console.log(iterator.next());
 console.log(iterator.next());
 console.log(iterator.next());
+
+
+// or
+company[Symbol.iterator] = function* employeeGenerator() {
+    let currentEmployee = 0;
+    while(currentEmployee < this.employees.length) {
+        // Pauses and returns value
+        // When next is called will continue from last point
+        yield this.employees[currentEmployee];
+        currentEmployee++;
+    }
+};
+
+for (const employee of company) {
+    console.log(employee);
+}
