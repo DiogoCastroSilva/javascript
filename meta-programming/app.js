@@ -73,3 +73,14 @@ company[Symbol.iterator] = function* employeeGenerator() {
 for (const employee of company) {
     console.log(employee);
 }
+
+
+// Reflect API
+const course = {
+    title: 'Javascript The Complete Guide'
+};
+
+// Lets change the object in meta - Can be used to change libraries
+// Has better debuging than the Object API and has more methods like deleteProperty
+Reflect.setPrototypeOf(course, { toString() { return this.title } });
+console.log(course.toString());
