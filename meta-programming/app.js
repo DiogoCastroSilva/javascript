@@ -84,3 +84,20 @@ const course = {
 // Has better debuging than the Object API and has more methods like deleteProperty
 Reflect.setPrototypeOf(course, { toString() { return this.title } });
 console.log(course.toString());
+
+
+// Proxy API
+const courseHandler = {
+    get(obj, propertyName) {
+        console.log(propertyName);
+        return obj[propertyName] || 'Not Found';
+    },
+    set(obj, propertyName, newValue) {
+        obj[propertyName] = newValue;
+    }
+};
+
+const pCourse = new Proxy(course, courseHandler);
+console.log(pCourse.title);
+pCourse.rating = 5;
+console.log(pCourse.rating);
