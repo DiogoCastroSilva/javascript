@@ -2,6 +2,7 @@ import { products } from './products';
 import { renderProducts } from './rendering';
 
 const addProduct = (e) => {
+    e.preventDefault();
     import('./product-management').then(mod => {
         mod.addProduct(e);
     });
