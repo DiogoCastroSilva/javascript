@@ -27,4 +27,5 @@ This was built follwing the tutorial in Udemy <a href="https://www.udemy.com/cou
     <li><a href="/project04-ShareMyPlaceApp/">Share My Place App</a></li>
     <li><a href="/meta-programming/">Meta Programming</a></li>
     <li><a href="/performance-optimizations/">Performace & Optimizations</a></li>
+    <li><a href="/testing/">Testing</a></li>
 </ol>
