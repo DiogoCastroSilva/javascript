@@ -2,9 +2,12 @@ class Tooltip extends HTMLElement {
     constructor() {
         super();
         this.containerElement;
+        this.text;
     }
 
     connectedCallback() {
+        this.text = this.hasAttribute('text') ? this.getAttribute('text') : 'Tooltip text';
+
         const iconElement = document.createElement('span');
         iconElement.textContent = ' (?)';
 
@@ -16,7 +19,7 @@ class Tooltip extends HTMLElement {
 
     _showTooltip() {
         this.containerElement = document.createElement('div');
-        this.containerElement.textContent = 'This is the tooltip text';
+        this.containerElement.textContent = this.text;
 
         this.appendChild(this.containerElement);
     }
