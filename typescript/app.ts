@@ -3,8 +3,23 @@ const num2: HTMLInputElement = <HTMLInputElement>document.getElementById('num2')
 const buttonElement: HTMLButtonElement = document.querySelector('button');
 
 
+type PrintMode = 'console' | 'alert';
+// or better
+enum OutputMode {
+    CONSOLE,
+    ALERT
+};
+
 function add(a: number, b: number): number {
     return a +b;
+}
+
+function print(result: string | number, mode: PrintMode = 'console') {
+    if (mode === 'console') {
+        console.log(result);
+    } else {
+        alert(result);
+    }
 }
 
 
@@ -13,5 +28,6 @@ buttonElement.addEventListener('click', () => {
     const num2Value = +num2.value;
 
     const result = add(num1Value, num2Value);
-    console.log(result);
+    
+    print(result);
 });
