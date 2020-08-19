@@ -45,7 +45,10 @@ test('Should generate a valid text output', () => {
 
 // Async code
 test('should have data', () => {
+    jest.mock('./util');
+    
     getData().then(data => {
         expect(data).not.toBeNull();
+        expect(data.title).toBe('New Post');
     });
 });
