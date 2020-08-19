@@ -3,6 +3,7 @@ class Tooltip extends HTMLElement {
         super();
         this.containerElement;
         this.text;
+        this.attachShadow({ mode: 'open' });
     }
 
     connectedCallback() {
@@ -14,19 +15,26 @@ class Tooltip extends HTMLElement {
         iconElement.addEventListener('mouseenter', this._showTooltip.bind(this));
         iconElement.addEventListener('mouseleave', this._hideTooltip.bind(this));
 
-        this.appendChild(iconElement);
+        this.shadowRoot.appendChild(iconElement);
     }
 
     _showTooltip() {
         this.containerElement = document.createElement('div');
         this.containerElement.textContent = this.text;
 
-        this.appendChild(this.containerElement);
+        // design
+        this.containerElement.style.backgroundColor = 'black';
+        this.containerElement.style.color = 'white';
+        this.containerElement.style.position = 'absolute';
+        this.containerElement.style.zIndex = '10';
+
+        this.shadowRoot.appendChild(this.containerElement);
+        this.style.position = 'relative';
     }
 
     _hideTooltip() {
         if (this.containerElement) {
-            this.containerElement.remove();
+            this.shadowRoot.removeChild(this.containerElement);
         }
     }
 }
