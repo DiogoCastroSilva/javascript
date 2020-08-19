@@ -53,3 +53,11 @@ buttonElement.addEventListener('click', () => {
     
     print(result);
 });
+
+// Generics
+function logAndEcho<T>(val: T) {
+    console.log(val);
+    return val;
+}
+
+logAndEcho<string>('Hi there').split(' ');
