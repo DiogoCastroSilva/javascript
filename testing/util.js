@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 const generateText = (name, age) => {
   // Returns output text
   return `${name} (${age} years old)`;
@@ -37,9 +39,8 @@ exports.checkAndGenerate = (name, age) => {
 }
 
 exports.getData = () => {
-  return fetch('https://jsonplaceholder.typicode.com/todos/1')
-    .then(response => response.json())
-    .then(json => json);
+  return axios('https://jsonplaceholder.typicode.com/todos/1')
+    .then(response => response.data);
 }
 
 exports.generateText = generateText;
