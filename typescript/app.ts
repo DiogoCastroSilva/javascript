@@ -2,8 +2,30 @@ const num1: HTMLInputElement = <HTMLInputElement>document.getElementById('num1')
 const num2: HTMLInputElement = <HTMLInputElement>document.getElementById('num2');
 const buttonElement: HTMLButtonElement = document.querySelector('button');
 
+interface IUser {
+    name: string;
+}
 
-type PrintMode = 'console' | 'alert';
+class User implements IUser {
+    public name: string;
+    private age: number;
+
+    constructor(name: string, age: number) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+class Admin extends User {
+    private permissions: string[];
+
+    constructor(name, age, permissions: string[]) {
+        super(name, age);
+        this.permissions = permissions;
+    }
+}
+
+type PrintMode = OutputMode.CONSOLE | OutputMode.ALERT;
 // or better
 enum OutputMode {
     CONSOLE,
@@ -14,8 +36,8 @@ function add(a: number, b: number): number {
     return a +b;
 }
 
-function print(result: string | number, mode: PrintMode = 'console') {
-    if (mode === 'console') {
+function print(result: string | number, mode: PrintMode = OutputMode.CONSOLE) {
+    if (mode === OutputMode.CONSOLE) {
         console.log(result);
     } else {
         alert(result);
